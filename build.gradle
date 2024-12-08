@@ -1,0 +1,63 @@
+plugins {
+    id 'org.springframework.boot' version '3.1.0'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'java'
+}
+
+group = 'com.kakaopay'
+version = '0.0.1-SNAPSHOT'
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot Core
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Database
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Lombok
+    implementation 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mockito:mockito-core'
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    // Optional Dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    runtimeOnly 'com.h2database:h2'
+
+    // Redis dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // Springdoc OpenAPI UI Starter (2.0.0 버전)
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.0'
+
+    // Jackson Datatype for JSR310 (for LocalDateTime support)
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    // javax.servlet 의존성 추가 (Spring Boot 3.x와 호환)
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()  // JUnit 5 사용 설정
+    testLogging {
+        events "passed", "failed", "skipped" // 출력할 이벤트 설정
+        exceptionFormat "full"  // 예외 발생 시 출력 형식 설정
+    }
+}
